@@ -1,5 +1,4 @@
 const std = @import("std");
-const testing = std.testing;
 
 pub fn file_contents_to_list (
         allocator: *std.mem.Allocator,
@@ -12,10 +11,10 @@ pub fn file_contents_to_list (
     defer allocator.free(file_buffer);
     _ = try file.readAll(file_buffer);
 
-    var list_of_strings = std.ArrayList(u8).init(allocator);
+    var list_of_u8 = std.ArrayList(u8).init(allocator);
 
     for (file_buffer) |character| {
-        try list_of_strings.append(character);
+        try list_of_u8.append(character);
     }
-    return list_of_strings;
+    return list_of_u8;
 }
